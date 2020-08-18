@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { produce, enableES5 } from \"immer\";\nexport default (function () {\n  enableES5();\n  return produce.apply(void 0, arguments);\n});","map":null,"metadata":{},"sourceType":"module"}
