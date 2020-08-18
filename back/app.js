@@ -13,6 +13,9 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const path = require("path");
+const hpp = require("hpp");
+const helmet = require("helmet");
+
 dotenv.config();
 db.sequelize
   .sync()
@@ -26,10 +29,17 @@ passportConfig();
 //post데이터를 받기위한 설정 프론트에서 던진데이터 걔네들을 해석해서 넣어준다
 app.use("/", express.static(path.join(__dirname, "uploads")));
 
-app.use(morgan("dev"));
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan("dev"));
+}
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "markupsns.com"],
     credentials: true,
   })
 );
