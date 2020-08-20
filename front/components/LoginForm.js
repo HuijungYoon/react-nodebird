@@ -48,7 +48,7 @@ const LoginForm = () => {
         <br />
         <Input
           name="user-password"
-          type="_password"
+          type="password"
           value={password}
           onChange={onChangePassword}
           required
